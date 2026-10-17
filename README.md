@@ -53,7 +53,16 @@ Datos del tramo:
 [6] Regimen TURBULENTO
 ```
 
-<!-- Agregar fotos de la calculadora: docs/nspire_piping.jpg -->
+En la calculadora (capturas del emulador de TI-Nspire CX Student Software, con
+los datos del proyecto EITH):
+
+| Menú de piping | M2: fricción en la descarga | M5a: NPSH con la bomba 1 m más abajo |
+|---|---|---|
+| ![Menú de piping](docs/piping_menu.png) | ![Factor de fricción por Swamee-Jain y Colebrook-White](docs/piping_friccion.png) | ![NPSH disponible contra 2 veces el NPSH requerido](docs/piping_npsh.png) |
+
+M2 parte de Swamee-Jain como semilla y converge con Colebrook-White en 2
+iteraciones (f = 0,026725, igual al notebook del proyecto). M5a verifica
+NPSH_d = 3,532 m ≥ 2·NPSH_r = 3,104 m.
 
 ## esfuerzos_vigas.py
 
@@ -67,6 +76,13 @@ Datos del tramo:
 
 Usa la convención de signos de Philpot y unidades SI base (m, N, Pa).
 
+Viga simplemente apoyada con carga distribuida w = 10 kN/m, L = 4 m y sección
+rectangular de 100 × 200 mm (M3 encadena M2 y M1):
+
+| M2: corte y momento máximos | M3: esfuerzo por flexión |
+|---|---|
+| ![Corte y momento máximos](docs/vigas_momento.png) | ![Esfuerzo por flexión en las fibras extremas](docs/vigas_flexion.png) |
+
 ## laplace.py
 
 La calculadora no hace álgebra simbólica, así que el programa recorre con
@@ -78,6 +94,14 @@ números el camino de un ejercicio típico:
   polos simples.
 - **M4:** respuesta de sistemas de primer y segundo orden, y teoremas del
   valor inicial y final, que cubren los casos de polo doble.
+
+EDO y'' + 2y' + 3y = escalón unitario, con condiciones iniciales nulas (M3
+encadena M2): Y(s) = 1/(s³ + 2s² + 3s), con un polo en 0 y un par complejo
+−1 ± 1,4142j, que el programa convierte en seno y coseno.
+
+| M3: Y(s) y sus polos | M3: respuesta y(t) |
+|---|---|
+| ![Y(s) y sus polos](docs/laplace_polos.png) | ![Respuesta en el tiempo con par complejo](docs/laplace_respuesta.png) |
 
 ## Cómo se escribieron
 
